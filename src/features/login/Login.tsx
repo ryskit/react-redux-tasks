@@ -19,9 +19,7 @@ const Login = () => {
   const isLoginView = useAppSelector(selectIsLoginView);
   const btnDisabler = authen.email === "" || authen.password === "";
   const login = async () => {
-    console.log("aaaaaaaaaaaaaa");
     if (isLoginView) {
-      console.log("bbbbbbbbbbbbbb");
       await dispatch(fetchAsyncLogin(authen));
     } else {
       const result = await dispatch(fetchAsyncSignUp(authen));
