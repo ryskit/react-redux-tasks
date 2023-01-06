@@ -82,6 +82,7 @@ export const deleteAsyncTask = createAsyncThunk(
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    console.log(res.data);
     return res.data;
   }
 );
@@ -126,6 +127,8 @@ const taskSlice = createSlice({
     });
 
     builder.addCase(deleteAsyncTask.fulfilled, (state, action) => {
+      console.log(state.tasks);
+      console.log(action.payload);
       return {
         ...state,
         tasks: state.tasks.filter((t) => t.id !== action.payload.id),

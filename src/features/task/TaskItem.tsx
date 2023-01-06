@@ -20,14 +20,13 @@ type Props = {
 const TaskItem: FC<Props> = (props) => {
   const { task } = props;
   const dispatch = useAppDispatch();
-  const clickTitle = () => {
-    dispatch(selectTask(task));
-    dispatch(editTask(task));
-  };
 
   return (
     <li className={styles.listItem}>
-      <span className={styles.cursor} onClick={() => clickTitle()}>
+      <span
+        className={styles.cursor}
+        onClick={() => dispatch(selectTask(task))}
+      >
         {task.title}
       </span>
       <div>
