@@ -12,6 +12,8 @@ export interface Task {
   updatedAt: string;
 }
 
+export type TaskInput = Pick<Task, "title">;
+
 export interface TaskState {
   tasks: Task[];
   editedTask: Task;
@@ -46,7 +48,8 @@ export const fetchAsyncTasks = createAsyncThunk("tasks/get", async () => {
 export const createAsyncTask = createAsyncThunk(
   "task/post",
   async (task: Task) => {
-    const res = await axios.post<Task>(`${apiUrl}`, task, {
+    const taskInput: TaskInput = { title: task.title };
+    const res = await axios.post<Task>(`${apiUrl}`, taskInput, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
@@ -59,7 +62,8 @@ export const createAsyncTask = createAsyncThunk(
 export const updateAsyncTask = createAsyncThunk(
   "task/put",
   async (task: Task) => {
-    const res = await axios.patch<Task>(`${apiUrl}/${task.id}`, task, {
+    const taskInput: TaskInput = { title: task.title };
+    const res = await axios.patch<Task>(`${apiUrl}/${task.id}`, taskInput, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

@@ -3,7 +3,13 @@ import { BsTrash } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 
 import styles from "./TaskItem.module.css";
-import { Task, deleteAsyncTask, editTask, selectTask } from "./taskSlice";
+import {
+  Task,
+  deleteAsyncTask,
+  editTask,
+  selectEditedTask,
+  selectTask,
+} from "./taskSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { Button } from "@material-ui/core";
 
@@ -14,13 +20,14 @@ type Props = {
 const TaskItem: FC<Props> = (props) => {
   const { task } = props;
   const dispatch = useAppDispatch();
+  const clickTitle = () => {
+    dispatch(selectTask(task));
+    dispatch(editTask(task));
+  };
 
   return (
     <li className={styles.listItem}>
-      <span
-        className={styles.cursor}
-        onClick={() => dispatch(selectTask(task))}
-      >
+      <span className={styles.cursor} onClick={() => clickTitle()}>
         {task.title}
       </span>
       <div>
