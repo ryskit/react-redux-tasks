@@ -19,14 +19,7 @@ export interface TaskState {
 }
 
 const initialState: TaskState = {
-  tasks: [
-    {
-      id: 0,
-      title: "",
-      createdAt: "",
-      updatedAt: "",
-    },
-  ],
+  tasks: [],
   editedTask: {
     id: 0,
     title: "",
@@ -44,7 +37,7 @@ const initialState: TaskState = {
 export const fetchAsyncTasks = createAsyncThunk("tasks/get", async () => {
   const res = await axios.get<Task[]>(`${apiUrl}`, {
     headers: {
-      Authrorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return res.data;
@@ -56,7 +49,7 @@ export const createAsyncTask = createAsyncThunk(
     const res = await axios.post<Task>(`${apiUrl}`, task, {
       headers: {
         "Content-Type": "application/json",
-        Authrorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.data;
@@ -69,7 +62,7 @@ export const updateAsyncTask = createAsyncThunk(
     const res = await axios.patch<Task>(`${apiUrl}/${task.id}`, task, {
       headers: {
         "Content-Type": "application/json",
-        Authrorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.data;
@@ -82,7 +75,7 @@ export const deleteAsyncTask = createAsyncThunk(
     const res = await axios.delete<Task>(`${apiUrl}/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        Authrorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.data;
